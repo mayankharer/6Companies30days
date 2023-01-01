@@ -1,0 +1,33 @@
+// Combination sum --------> "[ Backtracking ]"
+
+class Solution
+{
+public:
+    vector<vector<int>> res;
+    void help(int i, vector<int> &candidates, int target, vector<int> &sol)
+    {
+        if (target == 0)
+        {
+            res.push_back(sol);
+            return;
+        }
+        if (target < 0)
+        {
+            return;
+        }
+        if (i == candidates.size())
+        {
+            return;
+        }
+        help(i + 1, candidates, target, sol);
+        sol.push_back(candidates[i]);
+        help(i, candidates, target - candidates[i], sol);
+        sol.pop_back();
+    }
+    vector<vector<int>> combinationSum(vector<int> &candidates, int target)
+    {
+        vector<int> sol;
+        help(0, candidates, target, sol);
+        return res;
+    }
+};
